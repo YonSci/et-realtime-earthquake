@@ -1,4 +1,5 @@
-# Ethiopia Real-Time Seismic Activity Monitoring Dashboard
+# Ethiopia Real-Time Seismic Activity Monitoring Dashboard <img src="image/et_flag.png" width="50" />
+
 
 ## Introduction
 
@@ -9,6 +10,8 @@ The **Ethiopia Real-Time Seismic Activity Monitoring Dashboard** is an interacti
 - Explore earthquake locations on an interactive map
 
 The application retrieves up-to-date earthquake data from the **United States Geological Survey (USGS) Earthquake Catalog API**, a reputable source for global seismic information. It combines real-time data acquisition, robust data processing, and interactive visualization to deliver a comprehensive tool for monitoring earthquakes in Ethiopia. [USGS](https://earthquake.usgs.gov/fdsnws/event/1/quer)
+
+---
 
 ## Key Features
 
