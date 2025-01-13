@@ -10,6 +10,7 @@ import base64
 from pathlib import Path
 
 
+page_icon = "image/eq1.jpg"
 
 
 # Set page configuration
@@ -17,7 +18,11 @@ st.set_page_config(
     page_title="Ethiopia Earthquake Tracker",
     layout="centered", # Can be "centered" or "wide"
     initial_sidebar_state="expanded",
+    page_icon=page_icon
 )
+
+st.logo("image/eq1.jpg", size="large")
+
 
 # Apply custom CSS for styling
 st.markdown(

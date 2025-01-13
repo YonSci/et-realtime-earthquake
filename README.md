@@ -21,7 +21,7 @@ The application retrieves up-to-date earthquake data from the **United States Ge
 
 - **Data Presentation:** Filtered earthquake data is displayed in a **clear** and **concise table** format, with options to **download** the dataset for further analysis.
 
-- **Interactive Mapping:** An integrated map visualizes **earthquake epicenters**, with markers that provide detailed information-including **location**, **time**, **magnitude*, and **depth** upon interaction.
+- **Interactive Mapping:** An integrated map visualizes **earthquake epicenters**, with markers that provide detailed information-including **location**, **time**, **magnitude**, and **depth** upon interaction and the map tiles are provided by [OpenStreetMap](https://www.openstreetmap.org/).
 ---
 
 ## Technology Stack
