@@ -4,14 +4,12 @@ import requests
 import folium
 from streamlit_folium import st_folium
 from datetime import datetime, timedelta
-from datetime import datetime, timedelta
 import branca.colormap as cm
 from folium import IFrame, Map, Element
 import base64
 from pathlib import Path
 
-# Ethiopian flag emoji using Unicode
-ethiopian_flag = "\U0001F1EA\U0001F1F9"
+
 
 
 # Set page configuration
