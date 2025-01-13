@@ -23,9 +23,6 @@ You can access the dashboard at [Ethiopia Real-Time Seismic Activity Monitoring 
 
 <img src="image/eq3.png" />
 
-<img src="image/eq4.png" />
-
-<img src="image/eq5.png" />
 
 ---
 
