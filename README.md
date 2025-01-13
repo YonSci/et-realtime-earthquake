@@ -11,6 +11,22 @@ The **Ethiopia Real-Time Seismic Activity Monitoring Dashboard** is an interacti
 
 The application retrieves up-to-date earthquake data from the **United States Geological Survey (USGS) Earthquake Catalog API**, a reputable source for global seismic information. It combines real-time data acquisition, robust data processing, and interactive visualization to deliver a comprehensive tool for monitoring earthquakes in Ethiopia. [USGS](https://earthquake.usgs.gov/fdsnws/event/1/quer)
 
+You can access the dashboard at [Ethiopia Real-Time Seismic Activity Monitoring Dashboard](https://et-realtime-earthquake-b2ugjsgndvpslsnuyvp8p3.streamlit.app/)   
+
+## Application Demonstration (Video): Seismic Activity Monitoring Dashboard
+
+[![Video Title](https://img.youtube.com/vi/Zy8kmDLxJ4c/0.jpg)](https://youtu.be/Zy8kmDLxJ4c)
+
+## Application Demonstration (Screenshots): Seismic Activity Monitoring Dashboard
+
+<img src="image/eq2.png" />
+
+<img src="image/eq3.png" />
+
+<img src="image/eq4.png" />
+
+<img src="image/eq5.png" />
+
 ---
 
 ## Key Features
@@ -32,3 +48,7 @@ The application retrieves up-to-date earthquake data from the **United States Ge
 
 - **Mapping:** Employs [Folium](https://python-visualization.github.io/folium/), a Python library for creating interactive maps, providing users with an intuitive geographical representation of seismic events.
 ---
+
+
+
+
