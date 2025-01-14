@@ -162,7 +162,7 @@ def img_to_html(img_path):
 
 # Main title
 
-st.markdown(f"<h1 class='main-title'>Ethiopia Real-Time Seismic Activity Monitoring Dashboard {img_to_html('./image/et_flag.png')} </h1>", unsafe_allow_html=True)
+st.markdown(f"<h1 class='main-title'>Ethiopian Real-Time Seismic Activity Monitoring Dashboard {img_to_html('./image/et_flag.png')} </h1>", unsafe_allow_html=True)
 
 
 #st.markdown(f'<h1 class="main-title">Ethiopia Real-Time Seismic Activity Monitoring Dashboard {img_to_html('/image/et_falg.png')} </h1>', unsafe_allow_html=True)

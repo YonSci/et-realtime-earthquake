@@ -1,9 +1,9 @@
-# Ethiopia Real-Time Seismic Activity Monitoring Dashboard <img src="image/et_flag.png" width="50" />
+# Ethiopian Real-Time Seismic Activity Monitoring Dashboard <img src="image/et_flag.png" width="50" />
 
 
 ## Introduction
 
-The **Ethiopia Real-Time Seismic Activity Monitoring Dashboard** is an interactive web application designed to monitor and visualize seismic activities across Ethiopia. This user-friendly tool provides real-time data on earthquakes, enabling users to:
+The **Ethiopian Real-Time Seismic Activity Monitoring Dashboard** is an interactive web application designed to monitor and visualize seismic activities across Ethiopia. This user-friendly tool provides real-time data on earthquakes, enabling users to:
 
 - Filter events by time period and magnitude
 - View detailed information in tabular format
@@ -15,11 +15,12 @@ You can access the dashboard at [Ethiopia Real-Time Seismic Activity Monitoring 
 
 ## Application Demonstration (Video): Seismic Activity Monitoring Dashboard
 
-[![Video Title](https://img.youtube.com/vi/Zy8kmDLxJ4c/0.jpg)](https://youtu.be/Zy8kmDLxJ4c)
+[![Video Title](https://img.youtube.com/vi/Zy8kmDLxJ4c/0.jpg)](https://youtu.be/Zy8kmDLxJ4c?si=-6oqTD_77WJy1ucb)
 
 ## Application Demonstration (Screenshots): Seismic Activity Monitoring Dashboard
 
 <img src="image/eq2.png" />
+
 
 <img src="image/eq3.png" />
 
