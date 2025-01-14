@@ -1,5 +1,7 @@
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import plotly.express as px
 import requests
 import folium
 from streamlit_folium import st_folium
@@ -68,7 +70,7 @@ st.markdown(
 if 'time_filter' not in st.session_state:
     st.session_state.time_filter = "Last 24 Hours"
 if 'min_magnitude' not in st.session_state:
-    st.session_state.min_magnitude = 2.5
+    st.session_state.min_magnitude = 1.0
 if 'max_magnitude' not in st.session_state:
     st.session_state.max_magnitude = 8.0
 if 'data' not in st.session_state:
@@ -76,12 +78,12 @@ if 'data' not in st.session_state:
 
 
 default_time_filter = "Last 24 Hours"
-default_min_magnitude = 2.5
+default_min_magnitude = 1.0
 default_max_magnitude = 8.0
 
 # Define a linear colormap for magnitudes
 min_magnitude = 1.0
-max_magnitude = 6.0
+max_magnitude = 7.0
 colormap = cm.linear.YlOrRd_09.scale(min_magnitude, max_magnitude)
 colormap = colormap.to_step(index=[1, 2, 3, 4, 5, 6])
 
@@ -165,8 +167,6 @@ def img_to_html(img_path):
 st.markdown(f"<h1 class='main-title'>Ethiopian Real-Time Seismic Activity Monitoring Dashboard {img_to_html('./image/et_flag.png')} </h1>", unsafe_allow_html=True)
 
 
-#st.markdown(f'<h1 class="main-title">Ethiopia Real-Time Seismic Activity Monitoring Dashboard {img_to_html('/image/et_falg.png')} </h1>', unsafe_allow_html=True)
-
 # Sidebar for filters
 with st.sidebar:
     st.header("Filter Options")
@@ -223,6 +223,11 @@ if st.session_state.data is not None and not st.session_state.data.empty:
             file_name='earthquake_data.csv',
             mime='text/csv',
         )
+
+
+    # Plotting the bar chart
+
+
 
 # Map Visualization
 
@@ -287,9 +292,65 @@ if st.session_state.data is not None and not st.session_state.data.empty:
     # colormap.position = 'bottomright'
     colormap.add_to(m)
 
-    # Display the map
 
     # Display the map in the Streamlit app
     st_folium(m, width=700, height=450)
 else:
     st.write("No data available. Please adjust the filters and fetch data.")
+
+# Earthquake Occurrences
+st.markdown('<h2 class="main-subtitle">Daily Earthquake Occurrences </h2>', unsafe_allow_html=True)
+
+# st.markdown('<h3 class="main-subtitle">Table for Daily Earthquake Occurrences</h3>', unsafe_allow_html=True)
+
+# Convert 'Time' to datetime
+data['Time'] = pd.to_datetime(data['Time'])
+#data['Time'] = pd.to_datetime(data['Time'], format='%Y-%m-%d %H:%M:%S')
+# Extract date part
+data['Date'] = data['Time'].dt.date
+# Count occurrences
+daily_counts = data['Date'].value_counts().sort_index()
+# Handle single data point
+if len(daily_counts) == 1:
+    single_date = daily_counts.index[0]
+    # Create a new Series with the next day's date and a count of 0
+    next_day = pd.Series([0], index=[single_date + timedelta(days=1)])
+    # Concatenate the original Series with the new Series
+    daily_counts = pd.concat([daily_counts, next_day])
+
+# Convert to DataFrame for Plotly
+daily_counts_df = daily_counts.reset_index()
+daily_counts_df.columns = ['Date', 'Number of Earthquakes']
+
+# Display data in an expander
+with st.expander("View Data Table", expanded=True):
+    st.dataframe(daily_counts_df)
+
+    # Download data as CSV
+    csv = daily_counts_df.to_csv(index=False)
+    st.download_button(
+        label="Download Data as CSV",
+        data=csv,
+        file_name='earthquake_data_count.csv',
+        mime='text/csv',
+    )
+
+st.markdown('<h3 class="main-subtitle">Bar chart for daily earthquake occurrences</h3>', unsafe_allow_html=True)
+
+fig = px.bar(
+    daily_counts_df,
+    x='Date',
+    y='Number of Earthquakes',
+    labels={'Date': 'Date', 'Number of Earthquakes': 'Number of Earthquakes'},
+    title='Earthquake Occurrences',
+    template='plotly_white'
+)
+
+fig.update_layout(
+    xaxis_title='Date',
+    yaxis_title='Number of Earthquakes',
+    xaxis=dict(tickformat='%Y-%m-%d'),
+    bargap=0.2
+)
+
+st.plotly_chart(fig, use_container_width=True)

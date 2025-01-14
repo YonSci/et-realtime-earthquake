@@ -19,10 +19,22 @@ You can access the dashboard at [Ethiopia Real-Time Seismic Activity Monitoring 
 
 ## Application Demonstration (Screenshots): Seismic Activity Monitoring Dashboard
 
+## Data Table : Seismic Activity Monitoring Dashboard
+
 <img src="image/eq2.png" />
 
+## Interactive map with earthquake locations 
 
 <img src="image/eq3.png" />
+
+## Table for daily earthquake data in Ethiopia
+
+<img src="image/t1.png" />
+
+## Bar chart for daily earthquake data in Ethiopia
+
+<img src="image/b1.png" />
+
 
 
 ---
@@ -36,6 +48,8 @@ You can access the dashboard at [Ethiopia Real-Time Seismic Activity Monitoring 
 - **Data Presentation:** Filtered earthquake data is displayed in a **clear** and **concise table** format, with options to **download** the dataset for further analysis.
 
 - **Interactive Mapping:** An integrated map visualizes **earthquake epicenters**, with markers that provide detailed information-including **location**, **time**, **magnitude**, and **depth** upon interaction and the map tiles are provided by [OpenStreetMap](https://www.openstreetmap.org/).
+
+- **Count the number of earthquakes** in Ethiopia for the last 24 hours, 7 days, 30 days and any custom date range and provide the results in a table and bar chart format.
 ---
 
 ## Technology Stack
