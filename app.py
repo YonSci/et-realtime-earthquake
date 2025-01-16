@@ -296,61 +296,142 @@ if st.session_state.data is not None and not st.session_state.data.empty:
     # Display the map in the Streamlit app
     st_folium(m, width=700, height=450)
 else:
-    st.write("No data available. Please adjust the filters and fetch data.")
+    st.warning("No data available. Please adjust the filters and fetch data.")
 
 # Earthquake Occurrences
 st.markdown('<h2 class="main-subtitle">Daily Earthquake Occurrences </h2>', unsafe_allow_html=True)
 
-# st.markdown('<h3 class="main-subtitle">Table for Daily Earthquake Occurrences</h3>', unsafe_allow_html=True)
+# Check if 'data' exists in session state and is valid
+if 'data' in st.session_state and st.session_state.data is not None and not st.session_state.data.empty:
+    data = st.session_state.data  # Retrieve data from session state
+    
+    # Ensure the 'Time' column exists
+    if 'Time' in data.columns:
+        # Convert 'Time' to datetime
+        data['Time'] = pd.to_datetime(data['Time'])
+        
+        # Extract the date part
+        data['Date'] = data['Time'].dt.date
+        
+        # Count occurrences by date
+        daily_counts = data['Date'].value_counts().sort_index()
 
-# Convert 'Time' to datetime
-data['Time'] = pd.to_datetime(data['Time'])
-#data['Time'] = pd.to_datetime(data['Time'], format='%Y-%m-%d %H:%M:%S')
-# Extract date part
-data['Date'] = data['Time'].dt.date
-# Count occurrences
-daily_counts = data['Date'].value_counts().sort_index()
-# Handle single data point
-if len(daily_counts) == 1:
-    single_date = daily_counts.index[0]
-    # Create a new Series with the next day's date and a count of 0
-    next_day = pd.Series([0], index=[single_date + timedelta(days=1)])
-    # Concatenate the original Series with the new Series
-    daily_counts = pd.concat([daily_counts, next_day])
+        # Handle cases where there is only one data point
+        if len(daily_counts) == 1:
+            single_date = daily_counts.index[0]
+            next_day = pd.Series([0], index=[single_date + timedelta(days=1)])
+            daily_counts = pd.concat([daily_counts, next_day])
 
-# Convert to DataFrame for Plotly
-daily_counts_df = daily_counts.reset_index()
-daily_counts_df.columns = ['Date', 'Number of Earthquakes']
+        # Convert to DataFrame for visualization
+        daily_counts_df = daily_counts.reset_index()
+        daily_counts_df.columns = ['Date', 'Number of Earthquakes']
 
-# Display data in an expander
-with st.expander("View Data Table", expanded=True):
-    st.dataframe(daily_counts_df)
+        # Display data in an expander
+        with st.expander("View Data Table", expanded=True):
+            st.dataframe(daily_counts_df)
 
-    # Download data as CSV
-    csv = daily_counts_df.to_csv(index=False)
-    st.download_button(
-        label="Download Data as CSV",
-        data=csv,
-        file_name='earthquake_data_count.csv',
-        mime='text/csv',
-    )
+            # Download data as CSV
+            csv = daily_counts_df.to_csv(index=False)
+            st.download_button(
+                label="Download Data as CSV",
+                data=csv,
+                file_name='earthquake_data_count.csv',
+                mime='text/csv',
+            )
 
-st.markdown('<h3 class="main-subtitle">Bar chart for daily earthquake occurrences</h3>', unsafe_allow_html=True)
+        # Bar chart visualization
+        st.markdown('<h3 class="main-subtitle">Bar Chart for Daily Earthquake Occurrences</h3>', unsafe_allow_html=True)
+        
+        fig = px.bar(
+            daily_counts_df,
+            x='Date',
+            y='Number of Earthquakes',
+            labels={'Date': 'Date', 'Number of Earthquakes': 'Number of Earthquakes'},
+            title='Earthquake Occurrences',
+            template='plotly_white'
+        )
 
-fig = px.bar(
-    daily_counts_df,
-    x='Date',
-    y='Number of Earthquakes',
-    labels={'Date': 'Date', 'Number of Earthquakes': 'Number of Earthquakes'},
-    title='Earthquake Occurrences',
-    template='plotly_white'
-)
+        fig.update_layout(
+            xaxis_title='Date',
+            yaxis_title='Number of Earthquakes',
+            xaxis=dict(tickformat='%Y-%m-%d'),
+            bargap=0.2
+        )
 
-fig.update_layout(
-    xaxis_title='Date',
-    yaxis_title='Number of Earthquakes',
-    xaxis=dict(tickformat='%Y-%m-%d'),
-    bargap=0.2
-)
+        st.plotly_chart(fig, use_container_width=True)
+    else:
+        st.warning("The 'Time' column is missing in the fetched data.")
+else:
+    st.warning("No earthquake data is available. Please adjust the filters and fetch data.")
 
-st.plotly_chart(fig, use_container_width=True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # Convert 'Time' to datetime
+# data['Time'] = pd.to_datetime(data['Time'])
+# #data['Time'] = pd.to_datetime(data['Time'], format='%Y-%m-%d %H:%M:%S')
+# # Extract date part
+# data['Date'] = data['Time'].dt.date
+# # Count occurrences
+# daily_counts = data['Date'].value_counts().sort_index()
+# # Handle single data point
+# if len(daily_counts) == 1:
+#     single_date = daily_counts.index[0]
+#     # Create a new Series with the next day's date and a count of 0
+#     next_day = pd.Series([0], index=[single_date + timedelta(days=1)])
+#     # Concatenate the original Series with the new Series
+#     daily_counts = pd.concat([daily_counts, next_day])
+
+# # Convert to DataFrame for Plotly
+# daily_counts_df = daily_counts.reset_index()
+# daily_counts_df.columns = ['Date', 'Number of Earthquakes']
+
+# # Display data in an expander
+# with st.expander("View Data Table", expanded=True):
+#     st.dataframe(daily_counts_df)
+
+#     # Download data as CSV
+#     csv = daily_counts_df.to_csv(index=False)
+#     st.download_button(
+#         label="Download Data as CSV",
+#         data=csv,
+#         file_name='earthquake_data_count.csv',
+#         mime='text/csv',
+#     )
+
+# st.markdown('<h3 class="main-subtitle">Bar chart for daily earthquake occurrences</h3>', unsafe_allow_html=True)
+
+# fig = px.bar(
+#     daily_counts_df,
+#     x='Date',
+#     y='Number of Earthquakes',
+#     labels={'Date': 'Date', 'Number of Earthquakes': 'Number of Earthquakes'},
+#     title='Earthquake Occurrences',
+#     template='plotly_white'
+# )
+
+# fig.update_layout(
+#     xaxis_title='Date',
+#     yaxis_title='Number of Earthquakes',
+#     xaxis=dict(tickformat='%Y-%m-%d'),
+#     bargap=0.2
+# )
+
+# st.plotly_chart(fig, use_container_width=True)

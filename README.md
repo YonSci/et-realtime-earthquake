@@ -19,19 +19,19 @@ You can access the dashboard at [Ethiopia Real-Time Seismic Activity Monitoring 
 
 ## Application Demonstration (Screenshots): Seismic Activity Monitoring Dashboard
 
-## Data Table : Seismic Activity Monitoring Dashboard
+### Data Table : Seismic Activity Monitoring Dashboard
 
 <img src="image/eq2.png" />
 
-## Interactive map with earthquake locations 
+### Interactive map with earthquake locations 
 
 <img src="image/eq3.png" />
 
-## Table for daily earthquake data in Ethiopia
+### Table for daily earthquake data in Ethiopia
 
 <img src="image/t1.png" />
 
-## Bar chart for daily earthquake data in Ethiopia
+### Bar chart for daily earthquake data in Ethiopia
 
 <img src="image/b1.png" />
 
